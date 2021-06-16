@@ -1,12 +1,7 @@
 # -*- coding:utf-8 -*-
-
-import time
 import cv2
-
 import numpy as np
 import tensorflow as tf
-from datetime import datetime
-
 from vsdkx.core.interfaces import ModelDriver
 from vsdkx.core.structs import Inference
 from vsdkx.core.util.model import load_tflite
