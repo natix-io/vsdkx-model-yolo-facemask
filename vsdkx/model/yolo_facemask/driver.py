@@ -40,7 +40,6 @@ class YoloFacemaskDriver(ModelDriver):
         self._mask_on = model_config['mask_on']
         self._mask_off = model_config['mask_off']
         self._mask_on_threshold = model_config['mask_on_threshold']
-        self._target_shape = model_settings['target_shape']
         self._conf_thresh = model_settings['conf_thresh']
         self._iou_thresh = model_settings['iou_thresh']
         self._interpreter, self._input_details, self._output_details = \
@@ -80,7 +79,7 @@ class YoloFacemaskDriver(ModelDriver):
             y = np.squeeze(y, axis=0)
             boxes, scores, classes = y[:, :4], y[:, 4:5], y[:, 5:6]
             classes = self._skew_no_mask_bias(boxes, scores, classes)
-            boxes = self._scale_boxes(boxes, self._input_shape, self._target_shape)
+            boxes = self._scale_boxes(boxes, self._input_shape, image.shape)
 
         return Inference(boxes, classes, scores)
 
