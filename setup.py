@@ -3,7 +3,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='vsdkx-yolo-facemask',
-    url='https://gitlab.com/natix/cvison/vsdkx/vsdkx-model-yolo-facemask',
+    url='https://github.com/natix-io/vsdkx-model-yolo-facemask.git',
     author='Helmut',
     author_email='helmut@natix.io',
     namespace_packages=['vsdkx', 'vsdkx.model'],
