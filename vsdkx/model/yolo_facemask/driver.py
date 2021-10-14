@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from vsdkx.core.interfaces import ModelDriver
-from vsdkx.core.structs import Inference
+from vsdkx.core.structs import Inference, FrameObject
 from vsdkx.core.util.model import load_tflite
 
 
@@ -11,6 +11,7 @@ class YoloFacemaskDriver(ModelDriver):
     """
     Class for object detection
     """
+
     def __init__(self, model_settings: dict, model_config: dict,
                  drawing_config: dict):
         """
@@ -47,19 +48,20 @@ class YoloFacemaskDriver(ModelDriver):
 
     def inference(
             self,
-            image
+            frame_object: FrameObject
     ) -> Inference:
         """
         Driver function for object detection inference
 
         Args:
-            image (np.array): 3D image array
+            frame_object (FrameObject): Frame Object
             debug (bool): Debug mode flag
 
         Returns:
             (array): Array of bounding boxes
         """
         # Resize the original image for inference
+        image = frame_object.frame
         resized_image = self._resize_img(image, self._input_shape)
         # Run the inference
         self._interpreter.set_tensor(
@@ -121,7 +123,8 @@ class YoloFacemaskDriver(ModelDriver):
             classes (np.array): Updates classes array
         """
 
-        for i, (box, score, class_id) in enumerate(zip(boxes, scores, classes)):
+        for i, (box, score, class_id) in enumerate(
+                zip(boxes, scores, classes)):
             if self._mask_on_threshold >= score and class_id == self._mask_on:
                 classes[i] = self._mask_off
 
