@@ -8,8 +8,11 @@ setup(
     author_email='helmut@natix.io',
     namespace_packages=['vsdkx', 'vsdkx.model'],
     packages=find_namespace_packages(include=['vsdkx*']),
+    dependency_links=[
+        'git+https://github.com/natix-io/vsdkx-core#egg=vsdkx-core'
+    ],
     install_requires=[
-        'ai_connector @ git+https://gitlab+deploy-token-432901:B7knEYm-ywm6GSmjKrs9@gitlab.com/natix/visiondeploy/aiconnector.git@1.0',
+        'vsdkx-core',
         'argparse',
         'opencv-python~=4.2.0.34',
         'pyyaml',
