@@ -1,3 +1,7 @@
+# Face mask detection
+
+This repo supports face mask detection utilizing YoloV5. Ideally this repo could be deprecated and the face mask detection model could be integrated to be supported by the `vsdkx-model-yolo-torch` repo.
+
 ### Model Settings
 ```yaml
 'conf_thresh': 0.5, # Float class confidence threshold
